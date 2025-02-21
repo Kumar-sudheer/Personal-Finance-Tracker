@@ -1,0 +1,22 @@
+import pymysql 
+import json 
+ 
+def lambda_handler(event, context):     
+    connection = pymysql.connect(
+        host=' database-1.cn8sgki8owsl.ap-south-1.rds.amazonaws.com',
+        user='transaction',
+        password='12345',
+        database='database-1' 
+    ) 
+     
+    cursor = connection.cursor() 
+     
+    cursor.execute("SELECT * FROM get") 
+    result = cursor.fetchall() 
+     
+    connection.close() 
+     
+    return { 
+        'statusCode': 200, 
+        'body': json.dumps(result) 
+    }
